@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shreeji Investment — Invest • Grow • Achieve</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #0b0f13;
+      --bg-2: #0b0b0d;
+      --card: #0f1315;
+      --gold: #d4af37;
+      --gold-2: #c79b2a;
+      --muted: #aeb6bd;
+      --glass: rgba(255,255,255,0.03);
+      --accent: linear-gradient(90deg,#d4af37,#c79b2a);
+      --maxw: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:radial-gradient(circle at 10% 10%, rgba(212,175,55,0.035), transparent 10%), linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#e6eef6;font-family:Inter,system-ui,Arial}
+    a{color:var(--gold);text-decoration:none}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px;max-width:var(--maxw);margin:0 auto}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#b08525);display:flex;align-items:center;justify-content:center;color:#0b0b0b;font-weight:800;font-family:Poppins,Inter;font-size:20px;box-shadow:0 8px 26px rgba(0,0,0,0.6)}
+    .logo-text h1{margin:0;font-family:Poppins,Inter;font-weight:800;font-size:20px;color:var(--gold)}
+    .logo-text p{margin:0;color:var(--muted);font-size:13px}
+    nav{display:flex;gap:14px;align-items:center}
+    .btn-outline{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);font-weight:600}
+    .btn-primary{background:var(--accent);padding:10px 14px;border-radius:10px;color:#0b0b0b;font-weight:700;box-shadow:0 10px 30px rgba(199,155,42,0.12);border:none;cursor:pointer}
+    main.container{max-width:var(--maxw);margin:28px auto;padding:20px}
+    .hero{padding:28px;border-radius:14px;display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:center;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 18px 60px rgba(2,6,10,0.6)}
+    .hero h2{margin:0;font-size:34px;line-height:1.05;color:var(--gold);font-family:Poppins}
+    .hero p.lead{color:var(--muted);margin:12px 0 18px;font-size:15px}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 30px rgba(2,6,10,0.6)}
+    .card h4{margin:0 0 8px;color:var(--gold);font-family:Poppins}
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;text-align:center;min-width:80px}
+    .stat h3{margin:0;color:var(--gold)}
+    .contact{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px}
+    input, textarea, select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:#fff}
+    .whatsapp{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--gold),var(--gold-2));width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0b0b0b;font-size:26px;box-shadow:0 18px 40px rgba(199,155,42,0.12);z-index:999;cursor:pointer}
+    footer{max-width:var(--maxw);margin:28px auto;padding:18px;color:var(--muted);text-align:center;font-size:14px}
+    @media(max-width:980px){.hero{grid-template-columns:1fr}.logo-text h1{font-size:18px}.hero h2{font-size:24px}}
+    .fadeup{animation:fadeUp .8s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    /* chart area */
+    .chart-wrap{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.02)}
+    canvas#miniChart{width:100%;height:220px;display:block;border-radius:8px}
+    /* animated button hover */
+    .btn-primary:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(199,155,42,0.18)}
+    /* nav language */
+    .lang{display:flex;gap:8px}
+    .lang button{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:6px 8px;border-radius:8px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-mark">SI</div>
+      <div class="logo-text">
+        <h1>Shreeji Investment</h1>
+        <p>Invest • Grow • Achieve</p>
+      </div>
+    </div>
+
+    <nav>
+      <div class="lang">
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('hi')">हिंदी</button>
+        <button onclick="setLang('gu')">ગુજરાતી</button>
+      </div>
+      <a class="btn-outline" href="#about">About</a>
+      <a class="btn-outline" href="#services">Services</a>
+      <button class="btn-primary" id="openAccount">Open Account</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero fadeup" aria-label="hero">
+      <div>
+        <h2>Trade Smart. Invest Confidently.<br/><span style="font-size:14px;color:var(--muted);font-weight:600">Local guidance • Personalized plans • F&O expertise</span></h2>
+        <p class="lead">Shreeji Investment helps retail traders & investors in Rajkot and Gujarat with quick account opening, professional advisory, and practical F&O training.</p>
+
+        <div class="features">
+          <div class="card">
+            <h4>Demat & Trading Accounts</h4>
+            <p style="color:var(--muted);margin:0">Fast KYC & account activation. Support in Gujarati/Hindi/English.</p>
+          </div>
+          <div class="card">
+            <h4>Futures & Options Training</h4>
+            <p style="color:var(--muted);margin:0">From basics to advanced strategies — live workshops and one-on-one coaching.</p>
+          </div>
+          <div class="card">
+            <h4>Portfolio & SIP Advice</h4>
+            <p style="color:var(--muted);margin:0">Long-term investing guidance and SIP planning.</p>
+          </div>
+          <div class="card">
+            <h4>IPO & Mutual Fund Support</h4>
+            <p style="color:var(--muted);margin:0">Application help, allocation tracking, and advice.</p>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><h3>100+</h3><div style="color:var(--muted);font-size:13px">Happy clients</div></div>
+          <div class="stat"><h3>500+</h3><div style="color:var(--muted);font-size:13px">Accounts handled</div></div>
+          <div class="stat"><h3>50+</h3><div style="color:var(--muted);font-size:13px">Workshops</div></div>
+        </div>
+      </div>
+
+      <aside style="padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);height:100%;">
+        <div class="contact">
+          <h4 style="margin:0 0 8px;color:var(--gold)">Contact & Quick Signup</h4>
+          <p style="margin:0 0 8px;color:var(--muted);font-size:14px">Call / WhatsApp: <a id="phoneLink" href="https://wa.me/7041799575">7041799575</a><br>Email: <a id="emailLink" href="mailto:shreejiinvestment01@outlook.com">shreejiinvestment01@outlook.com</a></p>
+
+          <div class="chart-wrap" style="margin-bottom:12px">
+            <canvas id="miniChart"></canvas>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">Live-like chart preview</div>
+          </div>
+
+          <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+            <input required placeholder="Full name" id="name"/>
+            <input required placeholder="Mobile number" id="mobile"/>
+            <input placeholder="Email (optional)" id="uemail"/>
+            <button class="btn-primary" style="width:100%;margin-top:8px">Request Callback</button>
+          </form>
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+          <strong>Office:</strong><br/>RK Empire, Office No. 615, 150 Ft Ring Road, Rajkot
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" style="margin-top:22px">
+      <div class="card fadeup">
+        <h3 style="margin-top:0;color:var(--gold)">About Shreeji Investment</h3>
+        <p style="color:var(--muted)">Shreeji Investment is a local stock market service provider helping clients open trading & demat accounts, learn trading strategies, and manage investments with personal support in Gujarati, Hindi, and English.</p>
+      </div>
+    </section>
+
+    <section id="services" style="margin-top:18px">
+      <h3 style="color:var(--gold)">Services</h3>
+      <div class="features">
+        <div class="card fadeup">
+          <h4>Account Opening</h4>
+          <p style="color:var(--muted);margin:0">Simple KYC, PAN & Aadhaar based account setup.</p>
+        </div>
+        <div class="card fadeup">
+          <h4>Personal Advisory</h4>
+          <p style="color:var(--muted);margin:0">Personal portfolio review & recommendations.</p>
+        </div>
+        <div class="card fadeup">
+          <h4>Training & Workshops</h4>
+          <p style="color:var(--muted);margin:0">Group workshops & private coaching for traders.</p>
+        </div>
+        <div class="card fadeup">
+          <h4>IPO & MF Help</h4>
+          <p style="color:var(--muted);margin:0">End-to-end support for IPO and mutual fund applications.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="whatsapp" id="waBtn" title="WhatsApp us">💬</div>
+
+  <footer>© 2025 Shreeji Investment — Invest • Grow • Achieve • Email: shreejiinvestment01@outlook.com • Phone: 7041799575</footer>
+
+  <script>
+    // Language toggle (simple)
+    function setLang(l){
+      if(l==='hi'){
+        document.querySelector('.logo-text p').innerText = 'निवेश करें • बढ़ें • हासिल करें';
+        document.querySelector('.hero .lead')?.remove();
+        document.querySelector('.hero p.lead')?.innerText = 'श्रीजी इन्वेस्टमेंट राजकोट में रिटेल ट्रेडर्स और निवेशकों को तेजी से खाता खोलने, सलाह और F&O ट्रेनिंग प्रदान करता है।';
+      } else if(l==='gu'){
+        document.querySelector('.logo-text p').innerText = 'નિવેશ કરો • વધો • પ્રાપ્ત કરો';
+        document.querySelector('.hero p.lead')?.innerText = 'શ્રીજી ઇન્વેસ્ટમેન્ટ રાજકોટમાં રીટેલ ટ્રેડર્સ અને રોકાણકારોને ઝડપી ખાતા ખોલવા, માર્ગદર્શન અને F&O તાલીમ પ્રદાન કરે છે.';
+      } else {
+        document.querySelector('.logo-text p').innerText = 'Invest • Grow • Achieve';
+        document.querySelector('.hero p.lead')?.innerText = 'Shreeji Investment helps retail traders & investors in Rajkot and Gujarat with quick account opening, professional advisory, and practical F&O training.';
+      }
+    }
+    setLang('en');
+
+    // WhatsApp button
+    document.getElementById('waBtn').addEventListener('click', function(){
+      window.open('https://wa.me/7041799575','_blank');
+    });
+    document.getElementById('openAccount').addEventListener('click', function(){
+      window.open('https://wa.me/7041799575','_blank');
+    });
+
+    // Mini animated chart using Canvas
+    (function(){
+      const canvas = document.getElementById('miniChart');
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth * devicePixelRatio; canvas.height = canvas.clientHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let points = [];
+      const maxPoints = 60;
+      let base = 100;
+      for(let i=0;i<maxPoints;i++){ base += (Math.random()-0.45)*4; points.push(base); }
+
+      function draw(){
+        // shift older values and add new
+        if(points.length>maxPoints) points.shift();
+        base += (Math.random()-0.5)*3;
+        points.push(base);
+
+        // clear
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        // background gradient
+        const g = ctx.createLinearGradient(0,0,0,canvas.height);
+        g.addColorStop(0,'rgba(212,175,55,0.06)');
+        g.addColorStop(1,'rgba(212,175,55,0.005)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        // draw grid lines
+        ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+        ctx.lineWidth = 1;
+        for(let i=0;i<4;i++){
+          const y = (canvas.height/4)*i + 10;
+          ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // draw line
+        ctx.beginPath();
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        const min = Math.min(...points); const max = Math.max(...points);
+        for(let i=0;i<points.length;i++){
+          const x = (i/(points.length-1))*w;
+          const y = h - ((points[i]-min)/(max-min))*h;
+          if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        ctx.lineWidth = 2.6;
+        // glow
+        ctx.shadowColor = 'rgba(212,175,55,0.9)';
+        ctx.shadowBlur = 12;
+        ctx.strokeStyle = 'rgba(212,175,55,1)';
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // fill under line
+        ctx.lineTo(w, h); ctx.lineTo(0,h); ctx.closePath();
+        const g2 = ctx.createLinearGradient(0,0,0,h);
+        g2.addColorStop(0,'rgba(212,175,55,0.12)');
+        g2.addColorStop(1,'rgba(212,175,55,0.01)');
+        ctx.fillStyle = g2;
+        ctx.fill();
+
+        // draw latest value circle
+        const lastX = w;
+        const lastY = h - ((points[points.length-1]-min)/(max-min))*h;
+        ctx.beginPath();
+        ctx.fillStyle = '#0b0b0b';
+        ctx.arc(lastX-2, lastY, 6, 0, Math.PI*2);
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(212,175,55,1)';
+        ctx.stroke();
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
+</body>
+</html>
